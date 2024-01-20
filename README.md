@@ -1,1 +1,2 @@
-# SMIS_Project
+# SMIS_Project 
+using MERN stack
