@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.get('/', function (req, res) {
-  res.send('Hello Worlds');
+  res.send('Hello SMIS project');
 });
 
 app.listen(port, () => {
