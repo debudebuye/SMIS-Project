@@ -1,0 +1,128 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  student_id       String        @id @db.VarChar(10)
+  user_name        String        @db.VarChar(10)
+  first_name       String        @db.VarChar(15)
+  middle_name      String        @db.VarChar(15)
+  last_name        String        @db.VarChar(15)
+  gender           String        @db.VarChar(6)
+  birth_date       DateTime
+  department_id    String
+  program_type     String        @db.VarChar(10)
+  addmission_date  DateTime
+  password         String        @db.VarChar(15)
+  batch_id         String
+  picture          Bytes?
+  section          String        @db.VarChar(1)
+
+  Department       Department   @relation(fields: [department_id], references: [department_id])
+  Batch            Batch        @relation(fields: [batch_id], references: [batch_id])
+  // StudentStatus    StudentStatus[]
+}
+
+model Lecture {
+  lecture_id       String       @id @db.VarChar(10)
+  user_name        String       @db.VarChar(10)
+  password         String
+  first_name       String       @db.VarChar(15)
+  middle_name      String       @db.VarChar(15)
+  last_name        String       @db.VarChar(15)
+  gender           String       @db.VarChar(6)
+  birth_date       DateTime
+  department_id    String
+  employment_date  DateTime
+  // salary           Int           @db.Int(6)
+  qualifications   String       @db.VarChar(50)
+  picture          Bytes?
+
+  Department       Department   @relation(fields: [department_id], references: [department_id])
+  LectureDepartment LectureDepartment[]
+  CourseLecture    CourseLecture[]
+}
+
+model LectureDepartment {
+  lecture_id       String
+  department_id    String
+  Lecture          Lecture      @relation(fields: [lecture_id], references: [lecture_id])
+  // Department       Department   @relation(fields: [department_id], references: [department_id])
+
+  @@id([lecture_id, department_id])
+}
+
+model CourseLecture {
+  course_id        String
+  lecture_id       String
+  // Course           Course       @relation(fields: [course_id], references: [course_id])
+  Lecture          Lecture      @relation(fields: [lecture_id], references: [lecture_id])
+
+  @@id([course_id, lecture_id])
+}
+
+model Course {
+  course_id        String        @id @db.VarChar(15)
+  course_name      String        @db.VarChar(15)
+  course_code      String        @db.VarChar(15)
+  // credit_hour      Int           @db.Int(1)
+  // year             Int           @db.Int(1)
+  // semester         Int           @db.Int(1)
+
+  CourseDepartment CourseDepartment[]
+}
+
+model CourseDepartment {
+  course_id        String
+  department_id    String
+  Course           Course       @relation(fields: [course_id], references: [course_id])
+  Department       Department   @relation(fields: [department_id], references: [department_id])
+
+  @@id([course_id, department_id])
+}
+
+model Department {
+  department_id    String        @id @db.VarChar(10)
+  department_name  String
+  head_id          String
+  // DepartmentHead   DepartmentHead @relation(fields: [head_id], references: [head_id])
+  Lecture          Lecture[]
+  CourseDepartment CourseDepartment[]
+  Student          Student[]
+}
+
+model DepartmentHead {
+  head_id          String        @id @db.VarChar(10)
+  first_name       String        @db.VarChar(15)
+  middle_name      String        @db.VarChar(15)
+  last_name        String        @db.VarChar(15)
+  gender           String        @db.VarChar(6)
+  birth_date       DateTime
+  employment_date  DateTime
+  // salary           Int           @db.Int(6)
+  qualifications   String        @db.VarChar(50)
+  picture          Bytes?
+}
+
+model Batch {
+  batch_id         String        @id @db.VarChar(10)
+  batch_number     Int
+  Student          Student[]
+}
+
+// model StudentStatus {
+//   student_id       String
+//   // year             Int           @db.Int(1)
+//   // semester         Int           @db.Int(1)
+//   Student          Student       @relation(fields: [student_id], references: [student_id])
+
+//   @@id([student_id, year, semester])
+// }

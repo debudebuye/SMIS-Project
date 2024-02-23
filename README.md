@@ -1,3 +1,4 @@
+
 # # SMIS_Project
 
 This project is a School Management Information System (SMIS) developed using the MERN stack. It aims to provide a comprehensive platform for managing various aspects of a school's operations such as student enrollment, attendance tracking, grade management, teacher schedules, and more.
@@ -26,5 +27,8 @@ This project is a School Management Information System (SMIS) developed using th
 ## Getting Started
 
 1. **Clone the repository:**
-
-
+ to clone the github repository in to local machine 
+git clone https://github.com/debudebuye/SMIS-Project.git
+2.to clone the data in local device run this command 
+npx prisma db seed or 
+node prisma/seed.js
