@@ -46,6 +46,7 @@ async function createTables() {
       );`
     );
 
+    
     await createTableIfNotExists(
       'Lecture',
       `CREATE TABLE IF NOT EXISTS "Lecture" (
