@@ -55,34 +55,5 @@ router.post('/addData', async (req, res) => {
     }
   });
 
-// Read operation
-
-
-// // Update operation
-// app.put('/users/:id', async (req, res) => {
-//     const userId = parseInt(req.params.id);
-//     const { name, email } = req.body;
-//     const updatedUser = await prisma.user.update({
-//         where: {
-//             id: userId,
-//         },
-//         data: {
-//             name,
-//             email,
-//         },
-//     });
-//     res.json(updatedUser);
-// });
-
-// // Delete operation
-// app.delete('/users/:id', async (req, res) => {
-//     const userId = parseInt(req.params.id);
-//     await prisma.user.delete({
-//         where: {
-//             id: userId,
-//         },
-//     });
-//     res.json({ message: 'User deleted successfully' });
-// });
 
 module.exports = router;
