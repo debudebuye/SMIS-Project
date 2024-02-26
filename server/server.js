@@ -1,11 +1,8 @@
-require('dotenv').config();
-
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
 const bodyParser = require('body-parser');
 
 const studRoute = require('./controllers/addStudent');
+const dbConnection = require('./config/db.config');
 
 const app = express();
 
@@ -13,25 +10,13 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+require('dotenv').config();
 const port = process.env.PORT ;
 
 app.use('/',studRoute);
 
 
 
-const dbConnection =async ()=>{
-  try {
-    await prisma.$connect();
-    console.log("database connected");
-  } catch (error) {
-    console.log("database connection error ",error);
-  }
-  // finally{
-  //   await prisma.$connect();
-  //   console.log("database disconnected");
-  // }
-}
 
 dbConnection();
 
