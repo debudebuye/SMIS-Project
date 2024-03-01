@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20.11.0-buster-slim
 
 WORKDIR /server
 
@@ -13,4 +13,7 @@ RUN npm run seed
 EXPOSE 3003
 
 CMD [ "nodemon", "server" ]
+
+
+
 

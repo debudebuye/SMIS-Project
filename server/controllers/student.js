@@ -1,19 +1,24 @@
-const exp = require('express');
-const router = exp.Router();
+const express = require('express');
 const moment = require('moment');
 //const fs = require('fs');
+
 const { PrismaClient } = require('@prisma/client');
 
 
-const app = exp();
+const app = express();
 const prisma = new PrismaClient();
 
 
-router.get('/', async (req, res) => {
-     res.send('adding students to student table')
-});
+const getreq = async (req, res) => {
+     try {
+       const Students = await prisma.Student.findMany(); 
+       res.send(Students);
+     } catch (error) {
+       console.error('Error fetching data:', error);
+     } 
+}
 
-router.post('/addData', async (req, res) => {
+const addStudent = async (req, res) => {
     const { 
       student_id,     
       user_name,     
@@ -35,11 +40,11 @@ router.post('/addData', async (req, res) => {
 
       const birthDate = moment.utc(birth_date, 'DD-MM-YYYY').toDate();
       const addmissionDate = moment.utc(addmission_date, 'YYYY-MM-DD').toDate();
-      //const picture = fs.readFileSync('image/student/image.jpg').toString('base64');
+      const picture = fs.readFileSync('image/student/image.jpg').toString('base64');
       const newData = await prisma.Student.create({
          
         data: {
-          student_id,
+        student_id,
         user_name,
         first_name,
         middle_name,
@@ -51,7 +56,7 @@ router.post('/addData', async (req, res) => {
         addmission_date: addmissionDate,
         password,
         batch_id,
-        //picture: 'data:image/png;base64,${picture}',
+        picture: 'data:image/png;base64,${picture}',
         section
         }
 
@@ -65,7 +70,10 @@ router.post('/addData', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while adding data' });
 
     }
-  });
+  } 
 
 
-module.exports = router;
+
+  
+exports.getreq = getreq;
+exports.addStudent = addStudent;

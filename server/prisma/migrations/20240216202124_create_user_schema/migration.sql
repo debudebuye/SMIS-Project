@@ -7,13 +7,13 @@ CREATE TABLE "Student" (
     "last_name" VARCHAR(15) NOT NULL,
     "gender" VARCHAR(6) NOT NULL,
     "birth_date" TIMESTAMP(3) NOT NULL,
-    "department_id" TEXT NOT NULL,
-    "program_type" VARCHAR(10) NOT NULL,
-    "addmission_date" TIMESTAMP(3) NOT NULL,
-    "password" VARCHAR(15) NOT NULL,
-    "batch_id" TEXT NOT NULL,
+    "department_id" TEXT   NULL,
+    "program_type" VARCHAR(10)   NULL,
+    "addmission_date" TIMESTAMP(3)   NULL,
+    "password" VARCHAR(15)   NULL,
+    "batch_id" TEXT   NULL,
     "picture" BYTEA,
-    "section" VARCHAR(1) NOT NULL,
+    "section" VARCHAR(1)   NULL,
 
     CONSTRAINT "Student_pkey" PRIMARY KEY ("student_id")
 );

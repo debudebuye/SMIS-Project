@@ -17,17 +17,17 @@ model Student {
   middle_name      String        @db.VarChar(15)
   last_name        String        @db.VarChar(15)
   gender           String        @db.VarChar(6)
-  birth_date       DateTime
-  department_id    String
-  program_type     String        @db.VarChar(10)
-  addmission_date  DateTime
+  birth_date       DateTime?
+  department_id    String?
+  program_type     String?        @db.VarChar(10)
+  addmission_date  DateTime?
   password         String        @db.VarChar(15)
-  batch_id         String
+  batch_id         String?
   picture          Bytes?
   section          String        @db.VarChar(1)
 
-  Department       Department   @relation(fields: [department_id], references: [department_id])
-  Batch            Batch        @relation(fields: [batch_id], references: [batch_id])
+  Department       Department?   @relation(fields: [department_id], references: [department_id])
+  Batch            Batch?        @relation(fields: [batch_id], references: [batch_id])
   // StudentStatus    StudentStatus[]
 }
 
