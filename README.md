@@ -32,5 +32,4 @@ git clone https://github.com/debudebuye/SMIS-Project.git
 
 2. **Clone the database:**
 to clone the data in local device run this command 
-npx prisma db seed or 
-node prisma/seed.js
+npx prisma migrate dev
